@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Executive portfolio of Farhan Alam Khan — Customer Project Manager, Technical Program Manager, Global Delivery & Program Governance leader." />
+	<meta name="theme-color" content="#FFFFFF" />
+	<title>Farhan Alam Khan — Executive Portfolio</title>
+
+	<style>
+		/*
+			Executive portfolio UI system
+			Aesthetic: McKinsey + Stripe + Notion + Linear
+			Constraints: white space heavy, no gradients, subtle motion, fast.
+		*/
+		:root{
+			--bg:#F8FAFC;
+			--text:#111827;
+			--muted:#475569;
+			--accent:#1E3A8A;
+			--accent-soft:rgba(30,58,138,.14);
+			--success:#065F46;
+			--card:#FFFFFF;
+			--border:#E5E7EB;
+			--shadow:0 18px 42px rgba(15,23,42,.08);
+			--shadow-soft:0 10px 26px rgba(15,23,42,.06);
+			--radius:18px;
+			--radius-sm:14px;
+			--max:1120px;
+			--font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+			--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+		}
+
+		*{box-sizing:border-box}
+		html{scroll-behavior:smooth}
+		body{
+			margin:0;
+			font-family:var(--font);
+			background:var(--bg);
+			color:var(--text);
+			line-height:1.55;
+			letter-spacing:.1px;
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+		}
+		a{color:inherit; text-decoration:none}
+		a:hover{color:var(--accent)}
+		img{max-width:100%; display:block}
+
+		.container{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+		/* Top nav */
+		.topbar{
+			position:sticky; top:0; z-index:30;
+			background:rgba(255,255,255,.86);
+			backdrop-filter:saturate(160%) blur(10px);
+			border-bottom:1px solid var(--border);
+		}
+		.nav{
+			display:flex; align-items:center; justify-content:space-between;
+			padding:14px 0;
+		}
+		.brand{display:flex; align-items:center; gap:12px; min-width:180px}
+		.mark{
+			width:32px; height:32px; border-radius:11px;
+			background:var(--accent);
+			box-shadow:0 14px 34px rgba(30,58,138,.16);
+		}
+		.brand .title{font-weight:700; letter-spacing:.2px; font-size:14px}
+		.brand .sub{font-size:12.5px; color:var(--muted); margin-top:2px}
+		.brandStack{display:flex; flex-direction:column; line-height:1.1}
+
+		.navLinks{display:flex; gap:22px; align-items:center}
+		.navLinks a{font-size:13px; color:var(--muted); padding:8px 2px}
+		.navLinks a:hover{color:var(--text)}
+		.navCta{display:flex; gap:10px; align-items:center}
+
+		.mobileMenuBtn{display:none}
+		@media (max-width: 880px){
+			.navLinks{display:none}
+			.mobileMenuBtn{display:inline-flex}
+		}
+
+		/* Buttons */
+		.btn{
+			display:inline-flex; align-items:center; justify-content:center; gap:10px;
+			padding:10px 14px;
+			border-radius:999px;
+			border:1px solid var(--border);
+			background:#fff;
+			box-shadow:var(--shadow-soft);
+			font-weight:650;
+			font-size:13.5px;
+			white-space:nowrap;
+			transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+		}
+		.btn:hover{transform:translateY(-1px); box-shadow:0 14px 34px rgba(15,23,42,.10)}
+		.btn:active{transform:translateY(0)}
+		.btn.primary{
+			background:var(--accent);
+			border-color:transparent;
+			color:#fff;
+			box-shadow:0 18px 40px rgba(15,23,42,.18);
+		}
+		.btn.primary:hover{box-shadow:0 22px 48px rgba(30,58,138,.22)}
+		.btn.subtle{background:var(--card)}
+		.btnIcon{width:14px; height:14px; display:inline-block}
+		.btnIcon svg{width:14px; height:14px; display:block}
+
+		/* Hero */
+		header.hero{padding:62px 0 26px}
+		.heroGrid{display:grid; grid-template-columns: 1.15fr .85fr; gap:26px; align-items:start}
+		@media (max-width: 960px){
+			header.hero{padding:42px 0 20px}
+			.heroGrid{grid-template-columns:1fr}
+		}
+
+		.eyebrow{display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:var(--muted); font-size:13px}
+		.pill{display:inline-flex; gap:8px; align-items:center; padding:7px 10px; border:1px solid var(--border); border-radius:999px; background:var(--card)}
+		.pill b{color:var(--text)}
+
+		.h1{font-size:54px; line-height:1.04; margin:14px 0 10px; letter-spacing:-1.1px}
+		@media (max-width: 560px){.h1{font-size:40px}}
+		.h2{margin:0; color:var(--muted); font-size:16.5px; max-width:70ch; font-weight:650}
+		.positioning{margin-top:10px; font-size:15px; color:var(--text); font-weight:650; letter-spacing:-.1px}
+		.subhead{margin-top:14px; font-size:14px; color:var(--muted)}
+		.subhead strong{color:var(--text)}
+
+		.heroActions{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px}
+		.heroStack{display:flex; flex-direction:column; align-items:flex-start}
+
+		.heroHeadshot{
+			width:172px; height:172px;
+			border-radius:18px;
+			object-fit:cover;
+			border:1px solid var(--border);
+			background:#fff;
+			box-shadow:0 18px 44px rgba(15,23,42,.16);
+		}
+		@media (max-width: 560px){
+			.heroHeadshot{width:150px; height:150px}
+		}
+		.heroBadges{margin-top:12px}
+		.heroBadges .eyebrow{margin:0}
+		.coreCreds{margin-top:12px}
+		.coreCreds .t{font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 10px}
+		.credBadges{display:flex; gap:10px; flex-wrap:wrap}
+		.credBadge{
+			display:inline-flex;
+			align-items:center;
+			gap:10px;
+			padding:8px 10px;
+			border-radius:999px;
+			border:1px solid var(--border);
+			background:var(--card);
+			box-shadow:0 10px 24px rgba(15,23,42,.06);
+		}
+		.credBadge img{width:18px; height:18px; border-radius:4px}
+		.credBadge span{font-weight:800; font-size:12.8px; color:var(--text); letter-spacing:-.1px}
+		.heroName{
+			margin-top:14px;
+			font-size:clamp(38px, 4.2vw, 54px);
+			line-height:1.03;
+			letter-spacing:-1.1px;
+			font-weight:850;
+			margin-bottom:0;
+			white-space:nowrap;
+		}
+		@media (max-width: 560px){.heroName{white-space:normal}}
+		.heroTitle{margin:10px 0 0; color:var(--muted); font-size:16px; font-weight:650}
+		.heroScale{margin:8px 0 0; color:var(--muted); font-size:12.8px; font-weight:700; letter-spacing:.02em}
+		.heroVP{margin:10px 0 0; font-size:15px; color:var(--text); font-weight:650; letter-spacing:-.1px}
+		.heroSummary{margin-top:12px; max-width:68ch}
+
+		.heroCard{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow);
+			padding:16px;
+			display:block;
+		}
+		@media (max-width: 520px){
+			.heroCard{grid-template-columns:1fr}
+		}
+		.snapTitle{font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:10px}
+		.kv{display:grid; gap:10px}
+		.krow{display:grid; grid-template-columns: 160px 1fr; gap:10px; font-size:13.4px}
+		@media (max-width: 520px){.krow{grid-template-columns:1fr}}
+		.k{color:var(--muted)}
+		.v{font-weight:650}
+		.v a{color:var(--accent); text-decoration:underline; text-decoration-color:rgba(15,23,42,.18); text-underline-offset:3px}
+
+		/* Sections */
+		section{padding:48px 0}
+		.sectionTitle{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px}
+		.sectionTitle h3{margin:0; font-size:22px; letter-spacing:-.3px}
+		.sectionTitle p{margin:6px 0 0; color:var(--muted); font-size:13.8px; max-width:78ch}
+		.sectionHeader{display:flex; align-items:center; gap:12px}
+		.sectionDivider{border-top:1px solid var(--border)}
+
+		/* KPI cards */
+		.kpis{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
+		@media (max-width: 980px){.kpis{grid-template-columns: repeat(2, 1fr)}}
+		@media (max-width: 560px){.kpis{grid-template-columns: 1fr}}
+		.kpi{
+			border:1px solid var(--border);
+			border-radius:var(--radius-sm);
+			background:var(--card);
+			box-shadow:0 10px 24px rgba(15,23,42,.07);
+			padding:16px;
+			transition: transform .22s ease, box-shadow .22s ease;
+		}
+		.kpi:hover{transform:translateY(-3px); box-shadow:0 18px 44px rgba(15,23,42,.12)}
+		.kpi .big{font-size:18px; font-weight:780; letter-spacing:-.3px; color:var(--success)}
+		.kpi .label{margin-top:6px; color:var(--text); font-weight:650}
+		.kpi .note{margin-top:6px; color:var(--muted); font-size:12.7px}
+
+		/* Overview cards */
+		.overviewGrid{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+		@media (max-width: 900px){.overviewGrid{grid-template-columns:1fr}}
+		.panel{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:18px;
+		}
+		.panel h4{margin:0 0 10px; font-size:15px; letter-spacing:-.1px}
+		.panel ul{margin:0; padding-left:18px}
+		.panel li{margin:8px 0; color:var(--muted); font-size:13.7px}
+		.panel li b{color:var(--text)}
+
+		/* Timeline */
+		.timeline{display:grid; gap:12px}
+		.titem{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:18px;
+			display:grid;
+			grid-template-columns: 220px 1fr;
+			gap:16px;
+		}
+		@media (max-width: 740px){.titem{grid-template-columns:1fr}}
+		.tleft .year{font-family:var(--mono); font-size:12.5px; color:var(--muted)}
+		.tleft .role{font-weight:800; margin-top:6px; letter-spacing:-.2px}
+		.tleft .org{margin-top:4px; color:var(--muted); font-size:13.5px}
+		.badge{
+			display:inline-flex;
+			font-size:12px;
+			padding:4px 8px;
+			border-radius:999px;
+			background:#fff;
+			border:1px solid var(--border);
+			color:var(--accent);
+			font-weight:650;
+			margin-top:10px;
+		}
+		.bullets{margin:0; padding-left:18px}
+		.bullets li{margin:8px 0; color:var(--muted); font-size:13.7px}
+		.bullets b{color:var(--text)}
+
+		/* Value proposition */
+		.valueGrid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+		@media (max-width: 980px){.valueGrid{grid-template-columns: repeat(2, 1fr)}}
+		@media (max-width: 620px){.valueGrid{grid-template-columns: 1fr}}
+		.valueCard{
+			border:1px solid var(--border);
+			border-radius:var(--radius-sm);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:16px;
+		}
+		.valueCard h4{margin:0 0 8px; font-size:14px; letter-spacing:-.1px}
+		.valueCard p{margin:0; color:var(--muted); font-size:13.5px}
+
+		/* Case studies */
+		.caseGrid{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px}
+		@media (max-width: 860px){.caseGrid{grid-template-columns:1fr}}
+		.case{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:18px;
+		}
+		.case h4{margin:0 0 10px; font-size:16px; letter-spacing:-.2px}
+		.case .row{display:grid; grid-template-columns: 120px 1fr; gap:10px; margin-top:10px; font-size:13.5px}
+		.case .k{color:var(--muted)}
+		.case .v{color:var(--text)}
+		.metrics{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+		.metrics .m{font-size:12.2px; color:var(--muted); border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:999px}
+
+		/* Experience */
+		.roleCard{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:18px;
+		}
+		.roleTop{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap}
+		.roleTop h4{margin:0; font-size:16px; letter-spacing:-.2px}
+		.roleTop .meta{color:var(--muted); font-size:13px}
+		.cai{display:grid; gap:10px; margin-top:12px}
+		.cai .block{
+			border:1px solid var(--border);
+			border-radius:14px;
+			background:#fff;
+			padding:14px;
+		}
+		.cai .label{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px}
+		.cai p{margin:0; color:var(--muted); font-size:13.5px}
+		.cai p b{color:var(--text)}
+
+		/* Digital Innovation & AI */
+		.project{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:18px;
+		}
+		.projectHead{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap}
+		.projectHead h4{margin:0; font-size:16px; letter-spacing:-.2px}
+		.projectHead .links{display:flex; gap:10px; flex-wrap:wrap}
+		.smallLink{font-size:13.2px; font-weight:650; color:var(--accent); text-decoration:underline; text-decoration-color:rgba(15,23,42,.18); text-underline-offset:3px}
+		.demoBtn{padding:9px 12px; font-size:13.2px}
+		.project p{margin:10px 0 0; color:var(--muted); font-size:13.6px; max-width:96ch}
+		.projectGrid{display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:14px}
+		@media (max-width: 760px){.projectGrid{grid-template-columns:1fr}}
+		.box{
+			border:1px solid var(--border);
+			border-radius:14px;
+			background:#fff;
+			padding:14px;
+		}
+		.box h5{margin:0 0 8px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+		.box ul{margin:0; padding-left:18px}
+		.box li{margin:7px 0; color:var(--muted); font-size:13.5px}
+
+		/* Awards & Certifications */
+		.split{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+		@media (max-width: 900px){.split{grid-template-columns:1fr}}
+		.awardGrid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+		@media (max-width: 980px){.awardGrid{grid-template-columns: repeat(2, 1fr)}}
+		@media (max-width: 620px){.awardGrid{grid-template-columns: 1fr}}
+		.award{
+			border:1px solid var(--border);
+			border-radius:var(--radius-sm);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:16px;
+		}
+		.award .t{font-weight:800}
+		.award .d{margin-top:6px; color:var(--muted); font-size:13.2px}
+
+		.certGrid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+		@media (max-width: 980px){.certGrid{grid-template-columns: repeat(2, 1fr)}}
+		@media (max-width: 620px){.certGrid{grid-template-columns: 1fr}}
+		.cert{
+			border:1px solid var(--border);
+			border-radius:var(--radius-sm);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:16px;
+		}
+		.cert h4{margin:0 0 6px; font-size:14px}
+		.tagList{display:flex; flex-wrap:wrap; gap:10px}
+		.tag{font-size:12.5px; color:var(--muted); border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:999px}
+		.tag.strong{color:var(--success); border-color:rgba(6,95,70,.18)}
+
+		/* Certifications (premium, tabbed) */
+		.verifyLink{
+			display:inline-flex;
+			align-items:center;
+			gap:8px;
+			padding:7px 10px;
+			border-radius:999px;
+			border:1px solid var(--border);
+			background:#fff;
+			color:var(--text);
+			font-weight:700;
+			font-size:12.5px;
+			text-decoration:none;
+			transition: transform .18s ease, box-shadow .18s ease;
+		}
+		.verifyLink:hover{transform:translateY(-1px); box-shadow:0 12px 30px rgba(15,23,42,.10)}
+		.verifyLink:active{transform:translateY(0)}
+		
+		.tabs{margin-top:14px}
+		.tabBar{
+			display:flex;
+			gap:10px;
+			flex-wrap:wrap;
+			align-items:center;
+		}
+		.tabBtn{
+			appearance:none;
+			border:1px solid var(--border);
+			background:#fff;
+			border-radius:999px;
+			padding:9px 12px;
+			font-weight:700;
+			font-size:12.8px;
+			color:var(--muted);
+			cursor:pointer;
+			transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+		}
+		.tabBtn:hover{transform:translateY(-1px); box-shadow:0 12px 30px rgba(15,23,42,.08)}
+		.tabBtn[aria-selected="true"]{
+			background:rgba(30,58,138,.10);
+			border-color:rgba(30,58,138,.18);
+			color:var(--text);
+		}
+		.tabPanel{margin-top:14px; display:none}
+		.tabPanel[data-active="true"]{display:block}
+		
+		.coreGrid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+		@media (max-width: 980px){.coreGrid{grid-template-columns: repeat(2, 1fr)}}
+		@media (max-width: 620px){.coreGrid{grid-template-columns: 1fr}}
+		.coreCard{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:16px;
+		}
+		.coreTop{display:flex; gap:12px; align-items:flex-start; justify-content:space-between}
+		.logoChip{
+			font-family:var(--mono);
+			font-size:12px;
+			padding:6px 10px;
+			border-radius:999px;
+			background:#fff;
+			border:1px solid var(--border);
+			color:var(--text);
+			white-space:nowrap;
+		}
+		.coreCard h5{margin:10px 0 6px; font-size:14px; letter-spacing:-.2px}
+		.metaRows{display:grid; gap:8px; margin-top:10px}
+		.metaRow{display:grid; grid-template-columns: 92px 1fr; gap:10px; font-size:13.2px}
+		.metaRow .k{color:var(--muted)}
+		.metaRow .v{color:var(--text); font-weight:650}
+		
+		.capIntro{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow-soft);
+			padding:16px;
+		}
+		.capIntro p{margin:0; color:var(--muted); font-size:13.6px; max-width:95ch}
+		.credList{display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:14px}
+		@media (max-width: 860px){.credList{grid-template-columns: 1fr}}
+		.cred{
+			border:1px solid var(--border);
+			border-radius:14px;
+			background:#fff;
+			padding:14px;
+		}
+		.cred .t{font-weight:800; letter-spacing:-.2px}
+		.cred .p{margin-top:6px; color:var(--muted); font-size:13.2px}
+
+		/* Contact */
+		.contactCard{
+			border:1px solid var(--border);
+			border-radius:var(--radius);
+			background:var(--card);
+			box-shadow:var(--shadow);
+			padding:20px;
+			display:grid;
+			grid-template-columns: 1fr 1fr;
+			gap:16px;
+			align-items:center;
+		}
+		@media (max-width: 900px){.contactCard{grid-template-columns:1fr}}
+		.contactCard h4{margin:0 0 8px; font-size:16px}
+		.contactCard .muted{color:var(--muted); font-size:13.5px; margin:0}
+		.inlineCopy{display:inline-flex; align-items:center; gap:10px}
+		.copyBtn{
+			display:inline-flex; align-items:center; justify-content:center;
+			padding:7px 10px;
+			border-radius:999px;
+			border:1px solid var(--border);
+			background:#fff;
+			color:var(--text);
+			font-weight:650;
+			font-size:12.5px;
+			cursor:pointer;
+			transition: transform .18s ease, box-shadow .18s ease;
+		}
+		.copyBtn:hover{transform:translateY(-1px); box-shadow:0 12px 30px rgba(15,23,42,.10)}
+		.copyBtn:active{transform:translateY(0)}
+		.contactActions{display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-end}
+		@media (max-width: 900px){.contactActions{justify-content:flex-start}}
+
+		footer{
+			padding:34px 0 44px;
+			border-top:1px solid var(--border);
+			color:var(--muted);
+			font-size:13.2px;
+		}
+
+		/* Digital Innovation & AI theme */
+		.aiSection{
+			background:#0F172A;
+			color:#FFFFFF;
+		}
+		.aiSection .sectionTitle h3{color:#FFFFFF}
+		.aiSection .sectionTitle p,
+		.aiSection p,
+		.aiSection .project p,
+		.aiSection .box li{color:rgba(255,255,255,.78)}
+		.aiSection .project,
+		.aiSection .box{
+			background:rgba(255,255,255,.06);
+			border-color:rgba(255,255,255,.12);
+			box-shadow:none;
+		}
+		.aiSection .smallLink{color:#FFFFFF; text-decoration-color:rgba(255,255,255,.22)}
+		.aiSection .smallLink:hover{color:#FFFFFF; text-decoration-color:rgba(255,255,255,.42)}
+		.aiSection .btn{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18); color:#FFFFFF; box-shadow:none}
+		.aiSection .btn:hover{box-shadow:none}
+		.aiSection .btn.primary{background:rgba(59,130,246,.18); border-color:rgba(59,130,246,.22)}
+		.aiSection .btn.primary:hover{background:rgba(59,130,246,.22)}
+		.aiSection .copyBtn{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.18); color:#FFFFFF}
+
+		/* Subtle motion preferences */
+		@media (prefers-reduced-motion: reduce){
+			*{scroll-behavior:auto !important}
+			.btn, .kpi{transition:none !important}
+		}
+
+		/* Mobile nav sheet removed per request */
+	</style>
+</head>
+
+<body>
+	<div class="topbar">
+		<div class="container">
+			<div class="nav">
+				<a class="brand" href="#top" aria-label="Home">
+					<div class="mark" aria-hidden="true"></div>
+					<div class="brandStack">
+						<div class="title">Farhan Alam Khan</div>
+						<div class="sub">Customer Project Manager | Technical Program Manager</div>
+					</div>
+				</a>
+
+				<nav class="navLinks" aria-label="Primary">
+					<a href="#impact">Impact</a>
+					<a href="#overview">Overview</a>
+					<a href="#journey">Career Journey</a>
+					<a href="#programs">Programs</a>
+					<a href="#experience">Experience</a>
+					<a href="#ai">Digital Innovation &amp; AI</a>
+					<a href="#awards">Awards</a>
+					<a href="#contact">Contact</a>
+				</nav>
+
+				<div class="navCta"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="top"></div>
+
+	<header class="hero">
+		<div class="container">
+			<div class="heroGrid">
+				<div class="heroStack">
+					<img class="heroHeadshot" src="img/headshot.jpg" alt="Headshot of Farhan Alam Khan" loading="lazy" />
+					<div class="coreCreds" aria-label="Core Credentials">
+						<!-- Core Credentials title removed per request -->
+						<div class="credBadges">
+							<span class="credBadge"><img src="img/pmp.png" alt="PMP badge" loading="lazy" /><span>PMP</span></span>
+							<span class="credBadge"><img src="img/psm.png" alt="PSM I badge" loading="lazy" /><span>PSM I</span></span>
+							<span class="credBadge"><img src="img/itil.png" alt="ITIL 4 badge" loading="lazy" /><span>ITIL 4</span></span>
+						</div>
+					</div>
+					<div class="heroBadges">
+						<div class="eyebrow">
+							<span class="pill"><b>Open to Global Relocation</b></span>
+							<span class="pill"><b>10+ Years Experience</b></span>
+						</div>
+					</div>
+
+					<h1 class="heroName">Farhan Alam Khan</h1>
+					<p class="heroTitle">Customer Project Manager | Technical Program Manager</p>
+					<p class="heroScale">130+ Countries • 85K+ Assets • $1B Portfolio • $7M Savings</p>
+					<p class="heroVP">Delivering Global Programs, Governance Excellence, and AI-Enabled Transformation at Scale.</p>
+					<p class="heroSummary subhead">PMP-certified Customer Project Manager with 10+ years of experience leading global delivery, governance, transformation, and program execution initiatives across 130+ countries. Proven track record managing enterprise-scale portfolios, driving operational excellence, and delivering measurable business outcomes through stakeholder leadership, governance maturity, and disciplined execution.</p>
+
+					<div class="heroActions">
+						<a class="btn primary" href="docs/resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+						<a class="btn" href="https://www.linkedin.com/in/farhan-alam-khan" target="_blank" rel="noopener">LinkedIn</a>
+						<a class="btn" href="#ai">Digital Innovation &amp; AI</a>
+					</div>
+				</div>
+
+				<aside class="heroCard" aria-label="At a Glance">
+					<div class="kv">
+						<div class="snapTitle">At a Glance</div>
+						<div class="krow"><div class="k">Current Role</div><div class="v">Customer Project Manager</div></div>
+						<div class="krow"><div class="k">Organization</div><div class="v">Ericsson</div></div>
+						<div class="krow"><div class="k">Experience</div><div class="v">10+ Years</div></div>
+						<div class="krow"><div class="k">Location</div><div class="v">Noida, India</div></div>
+						<div class="krow"><div class="k">Availability</div><div class="v">Open to Global Relocation</div></div>
+						<div class="krow"><div class="k">Professional Highlights</div><div class="v">20+ professional certifications across Project Management, Agile Delivery, Service Governance, AI, Automation, and Citizen Development</div></div>
+						<div class="krow"><div class="k">Recognition</div><div class="v">CEO Key Contributor Award 2026<br>CEO Key Contributor Award 2023<br>Galactic Award 2021</div></div>
+						<div class="krow"><div class="k">Strategic Expertise</div><div class="v">Program Governance<br>Technical Program Management<br>Service Delivery Leadership<br>Portfolio Management<br>Operations Transformation<br>Executive Reporting<br>Vendor &amp; OEM Governance<br>Cross-Functional Leadership<br>Stakeholder Management<br>Risk &amp; Escalation Governance</div></div>
+						<div class="krow"><div class="k">Professional Focus</div><div class="v">Program Management<br>Technical Program Management<br>Service Delivery Leadership<br>Operations Transformation<br>Executive Governance</div></div>
+						<div class="krow"><div class="k">Email</div><div class="v"><span class="inlineCopy"><span id="emailLinkSnapshot">farhanalamkhan1801@gmail.com</span><button class="copyBtn" type="button" data-copy="farhanalamkhan1801@gmail.com" aria-label="Copy email">Copy</button></span></div></div>
+						<div class="krow"><div class="k">LinkedIn</div><div class="v"><a href="https://www.linkedin.com/in/farhan-alam-khan" target="_blank" rel="noopener">linkedin.com/in/farhan-alam-khan</a></div></div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</header>
+
+	<div class="sectionDivider"></div>
+	<section aria-label="Career progression strip" style="padding:14px 0">
+		<div class="container">
+			<div class="pill" style="width:100%; justify-content:center; gap:10px; padding:10px 12px">
+				<span style="color:var(--muted); font-weight:650">Assistant Engineer → IT Engineer → Delivery Lead → Customer Project Manager</span>
+				<span style="color:var(--muted)">|</span>
+				<span style="color:var(--text); font-weight:700">Ericsson</span>
+				<span style="color:var(--muted)">|</span>
+				<span style="color:var(--muted); font-weight:650">2016–Present</span>
+			</div>
+		</div>
+	</section>
+	<div class="sectionDivider"></div>
+
+	<section id="impact">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<div class="sectionHeader"><h3>Impact at Scale</h3></div>
+					<p>A snapshot of scale, responsibility, and measurable business impact delivered across global programs and operations.</p>
+				</div>
+			</div>
+
+			<div class="kpis">
+				<div class="kpi"><div class="big">10+ Years</div><div class="label">Experience</div><div class="note">Global delivery + operations execution</div></div>
+				<div class="kpi"><div class="big">130+ Countries</div><div class="label">Supported</div><div class="note">Cross-region stakeholder alignment</div></div>
+				<div class="kpi"><div class="big">85,000+ Assets</div><div class="label">Managed</div><div class="note">OEM + infrastructure portfolio visibility</div></div>
+				<div class="kpi"><div class="big">15,000+ Deployments</div><div class="label">Delivered</div><div class="note">Consistent execution at enterprise scale</div></div>
+				<div class="kpi"><div class="big">$1B</div><div class="label">Portfolio Exposure</div><div class="note">Program governance and executive reporting</div></div>
+				<div class="kpi"><div class="big">$7M</div><div class="label">Annual Cost Optimization</div><div class="note">Vendor + governance improvements</div></div>
+				<div class="kpi"><div class="big">99.95%</div><div class="label">SLA Achievement</div><div class="note">Delivery rigor + risk management</div></div>
+				<div class="kpi"><div class="big">3</div><div class="label">Executive Awards</div><div class="note">Recognized for enterprise impact</div></div>
+			</div>
+		</div>
+	</section>
+
+	<div class="sectionDivider"></div>
+
+	<section id="overview">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<div class="sectionHeader"><h3>Executive Profile</h3></div>
+					<p>Customer Project Manager and Technical Program Manager with 10+ years of progressive leadership experience across delivery governance, program execution, operational transformation, and enterprise-scale service environments.</p>
+				</div>
+			</div>
+
+			<div class="overviewGrid">
+				<div class="panel">
+					<h4>Executive Narrative</h4>
+					<ul>
+						<li><b>Progression within Ericsson</b> from Assistant Engineer to Customer Project Manager, expanding scope across service governance and global program delivery.</li>
+						<li><b>Governance leadership</b> focused on visibility, risk control, vendor alignment, and executive-ready reporting across large-scale global environments.</li>
+						<li><b>Technical program coordination</b> experienced coordinating cross-functional technical initiatives, stakeholder dependencies, risk management, roadmap execution, and executive governance across large-scale global environments.</li>
+						<li><b>Cross-functional leadership</b> experienced leading cross-functional initiatives across delivery, governance, lifecycle management, operational transformation, and stakeholder management in complex global environments.</li>
+						<li><b>Delivery execution</b> across global programs and service environments, improving outcomes through operating cadence and structured decision-making.</li>
+						<li><b>Operations transformation</b> with measurable cost optimization, improved planning, and reduced operational risk through disciplined program controls.</li>
+					</ul>
+				</div>
+
+				<div class="panel">
+					<h4>What I’m Known For</h4>
+					<ul>
+						<li><b>Project &amp; program leadership</b>: leading end-to-end delivery from planning and execution through governance, risk management, stakeholder alignment, and business outcomes.</li>
+						<li><b>Program governance at scale</b>: establishing operating cadences, KPIs, executive reporting, and decision-making frameworks across complex global environments.</li>
+						<li><b>Service delivery excellence</b>: driving operational performance, SLA achievement, escalation management, and continuous improvement across distributed teams and customers.</li>
+						<li><b>Supply chain &amp; vendor leadership</b>: coordinating global suppliers, OEMs, logistics, inventory, and partner ecosystems to support delivery commitments and operational goals.</li>
+						<li><b>AI-enabled innovation</b>: applying automation, analytics, and AI-driven solutions to improve reporting, governance visibility, decision support, and operational efficiency.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="sectionDivider"></div>
+
+	<section id="journey">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<div class="sectionHeader"><h3>Career Journey</h3></div>
+					<p>Internal growth within Ericsson, with increasing responsibility across infrastructure delivery, lifecycle governance, and customer-facing program leadership.</p>
+				</div>
+			</div>
+
+			<div class="timeline">
+				<div class="titem">
+					<div class="tleft">
+						<div class="year">2016</div>
+						<div class="role">Assistant Engineer</div>
+						<div class="org">Ericsson</div>
+						<div class="badge">Operational foundation</div>
+					</div>
+					<ul class="bullets">
+						<li><b>Challenge:</b> Execute reliably in complex delivery environments with high operational expectations.</li>
+						<li><b>Action:</b> Built delivery discipline, documentation rigor, and cross-functional coordination habits early.</li>
+						<li><b>Impact:</b> Established trusted execution baseline that enabled expanded scope over time.</li>
+					</ul>
+				</div>
+
+				<div class="titem">
+					<div class="tleft">
+						<div class="year">2019</div>
+						<div class="role">IT Engineer</div>
+						<div class="org">Ericsson</div>
+						<div class="badge">Delivery scale</div>
+					</div>
+					<ul class="bullets">
+						<li><b>Challenge:</b> Improve delivery consistency across distributed teams and changing priorities.</li>
+						<li><b>Action:</b> Strengthened milestone tracking, risk logs, and reporting routines across delivery workstreams.</li>
+						<li><b>Impact:</b> Improved visibility and predictability, enabling broader governance responsibilities.</li>
+					</ul>
+				</div>
+
+				<div class="titem">
+					<div class="tleft">
+						<div class="year">2021</div>
+						<div class="role">Delivery Lead – Infrastructure Lifecycle &amp; Service Governance</div>
+						<div class="org">Ericsson</div>
+						<div class="badge">Governance leadership</div>
+					</div>
+					<ul class="bullets">
+						<li><b>Challenge:</b> Low lifecycle governance visibility created operational risk and planning gaps.</li>
+						<li><b>Action:</b> Implemented governance cadence, reporting model, and portfolio-level controls for lifecycle planning.</li>
+						<li><b>Impact:</b> Identified critical lifecycle gaps, reduced risk exposure, and strengthened decision-making quality.</li>
+					</ul>
+				</div>
+
+				<div class="titem">
+					<div class="tleft">
+						<div class="year">2024</div>
+						<div class="role">Customer Project Manager – Delivery &amp; Service Governance</div>
+						<div class="org">Ericsson</div>
+						<div class="badge">Executive delivery leadership</div>
+					</div>
+					<ul class="bullets">
+						<li><b>Challenge:</b> Scale governance + delivery performance while meeting customer and executive expectations.</li>
+						<li><b>Action:</b> Led operating cadence across stakeholders, improved KPI visibility, and strengthened reporting narratives.</li>
+						<li><b>Impact:</b> Sustained high SLA outcomes, increased governance coverage, and delivered measurable cost improvements.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="value">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Leadership Value Proposition</h3>
+					<p>How I drive outcomes in complex, global delivery environments—through governance discipline, operational rigor, and modern automation.</p>
+				</div>
+			</div>
+
+			<div class="valueGrid">
+				<div class="valueCard"><h4>Global Program Leadership</h4><p>Lead multi-region programs with clear governance, milestone clarity, and decision readiness—while managing dependencies across teams and vendors.</p></div>
+				<div class="valueCard"><h4>Service Delivery &amp; Governance</h4><p>Build operating cadence, KPI frameworks, and executive reporting models that increase visibility, control risk, and elevate delivery performance.</p></div>
+				<div class="valueCard"><h4>Technical Program Management</h4><p>Translate technical complexity into structured plans and measurable outcomes—aligning execution with business priorities and customer commitments.</p></div>
+				<div class="valueCard"><h4>Executive Communication</h4><p>Create crisp narratives for leadership: what changed, why it matters, and what decision is needed—supported by traceable metrics.</p></div>
+				<div class="valueCard"><h4>Operational Excellence</h4><p>Standardize workflows, reduce variability, and implement controls that improve reliability, cost performance, and program predictability.</p></div>
+				<div class="valueCard"><h4>AI &amp; Digital Innovation</h4><p>Design practical AI and automation concepts to improve governance visibility, reporting speed, and decision support in delivery operations.</p></div>
+				<div class="valueCard"><h4>Continuous Growth</h4><p>Invest in modern delivery practices, certifications, and systems thinking—building capability to lead at Director / Head of Delivery scale.</p></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="programs">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Programs &amp; Transformations</h3>
+					<p>Representative examples of governance, delivery, lifecycle management, and operational transformation initiatives executed across complex global environments.</p>
+				</div>
+			</div>
+
+			<div class="caseGrid">
+				<article class="case">
+					<h4>Global OEM Governance Transformation</h4>
+					<div class="row"><div class="k">Challenge</div><div class="v">Governance visibility at ~6% across a highly distributed asset base.</div></div>
+					<div class="row"><div class="k">Actions</div><div class="v">Built governance framework, aligned vendors, implemented reporting model and cadence.</div></div>
+					<div class="row"><div class="k">Impact</div><div class="v"><b>96%</b> coverage; <b>85,000+</b> assets; <b>130+</b> countries enabled with consistent visibility.</div></div>
+					<div class="row"><div class="k">Why It Mattered</div><div class="v">Limited lifecycle visibility created planning risk, supportability concerns, renewal uncertainty, and inconsistent governance across regions.</div></div>
+					<div class="row"><div class="k">Leadership Approach</div><div class="v">Aligned cross-functional stakeholders, OEM partners, sourcing teams, and regional operations around a standardized governance model.</div></div>
+					<div class="row"><div class="k">Strategic Outcome</div><div class="v">Created a scalable governance framework that improved visibility and decision quality across 130+ countries.</div></div>
+					<div class="row"><div class="k">Leadership Takeaway</div><div class="v">Strong governance creates predictable outcomes even in highly distributed operating environments.</div></div>
+					<div class="metrics">
+						<span class="m">Coverage: 6% → 96%</span>
+						<span class="m">Assets: 85,000+</span>
+						<span class="m">Countries: 130+</span>
+					</div>
+				</article>
+
+				<article class="case">
+					<h4>Infrastructure Lifecycle Governance Program</h4>
+					<div class="row"><div class="k">Challenge</div><div class="v">Lifecycle gaps reduced planning quality and increased operational risk.</div></div>
+					<div class="row"><div class="k">Actions</div><div class="v">Introduced portfolio controls, lifecycle reporting, and decision-ready governance routines.</div></div>
+					<div class="row"><div class="k">Impact</div><div class="v"><b>10,000+</b> lifecycle gaps identified; improved planning; reduced operational risk exposure.</div></div>
+					<div class="row"><div class="k">Why It Mattered</div><div class="v">Lifecycle uncertainty increased operational risk and reduced planning confidence.</div></div>
+					<div class="row"><div class="k">Leadership Approach</div><div class="v">Introduced portfolio-level controls, lifecycle reporting, and governance routines to improve visibility and accountability.</div></div>
+					<div class="row"><div class="k">Strategic Outcome</div><div class="v">Created a repeatable governance model that could be scaled globally and embedded into planning cycles.</div></div>
+					<div class="row"><div class="k">Leadership Takeaway</div><div class="v">Visibility and governance maturity are critical enablers of long-term operational resilience.</div></div>
+					<div class="metrics">
+						<span class="m">Lifecycle gaps: 10,000+</span>
+						<span class="m">Improved planning quality</span>
+						<span class="m">Reduced risk</span>
+					</div>
+				</article>
+
+				<article class="case">
+					<h4>Hyperscaler Infrastructure Delivery Program</h4>
+					<div class="row"><div class="k">Challenge</div><div class="v">Execute large-scale global deployments with strict service targets.</div></div>
+					<div class="row"><div class="k">Actions</div><div class="v">Aligned delivery cadence, risk controls, and escalation paths across teams and vendors.</div></div>
+					<div class="row"><div class="k">Impact</div><div class="v"><b>15,000+</b> deployments delivered with <b>99.95%</b> SLA achievement.</div></div>
+					<div class="row"><div class="k">Why It Mattered</div><div class="v">Large-scale deployments required alignment across multiple teams, stakeholders, vendors, and customer expectations.</div></div>
+					<div class="row"><div class="k">Leadership Approach</div><div class="v">Established delivery cadence, escalation pathways, risk governance, and executive reporting structures.</div></div>
+					<div class="row"><div class="k">Operating Environment</div><div class="v">Global stakeholders<br>Regional delivery teams<br>OEM partners<br>Customer-facing governance<br>Executive reporting</div></div>
+					<div class="row"><div class="k">Strategic Outcome</div><div class="v">Enabled consistent execution at scale while maintaining delivery performance and service commitments.</div></div>
+					<div class="row"><div class="k">Leadership Takeaway</div><div class="v">Execution quality improves when governance and communication scale alongside delivery volume.</div></div>
+					<div class="metrics">
+						<span class="m">Deployments: 15,000+</span>
+						<span class="m">SLA: 99.95%</span>
+						<span class="m">Global execution</span>
+					</div>
+				</article>
+
+				<article class="case">
+					<h4>Cost Optimization Initiative</h4>
+					<div class="row"><div class="k">Challenge</div><div class="v">Increase value realization through vendor optimization and improved governance controls.</div></div>
+					<div class="row"><div class="k">Actions</div><div class="v">Rationalized vendor levers, strengthened governance, and created visibility for savings tracking.</div></div>
+					<div class="row"><div class="k">Impact</div><div class="v"><b>$7M</b> annual value realization; improved cost control and delivery confidence.</div></div>
+					<div class="row"><div class="k">Why It Mattered</div><div class="v">Organizations need sustainable cost optimization without compromising delivery performance.</div></div>
+					<div class="row"><div class="k">Leadership Approach</div><div class="v">Combined governance visibility, lifecycle planning, vendor alignment, and operational discipline.</div></div>
+					<div class="row"><div class="k">Levers Used</div><div class="v">Vendor governance<br>Lifecycle optimization<br>Inventory visibility<br>Renewal planning<br>Operational standardization</div></div>
+					<div class="row"><div class="k">Strategic Outcome</div><div class="v">Improved financial visibility while creating a repeatable model for value realization.</div></div>
+					<div class="row"><div class="k">Leadership Takeaway</div><div class="v">Operational excellence and governance discipline are powerful drivers of business value.</div></div>
+					<div class="metrics">
+						<span class="m">Annual value: $7M</span>
+						<span class="m">Vendor optimization</span>
+						<span class="m">Governance uplift</span>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="experience">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Professional Experience</h3>
+					<p>Each role is written in a Challenge → Action → Impact format to show scale, leadership, and business outcomes.</p>
+				</div>
+			</div>
+
+			<div style="display:grid; gap:14px">
+				<article class="roleCard">
+					<div class="roleTop">
+						<h4>Customer Project Manager – Delivery &amp; Service Governance</h4>
+						<div class="meta">Ericsson • 2024–Present</div>
+					</div>
+					<div class="cai">
+						<div class="block"><div class="label">Challenge</div><p>Scale delivery and governance performance across a high-volume, global footprint while meeting customer and executive expectations.</p></div>
+						<div class="block"><div class="label">Action</div><p>Owned the operating cadence across stakeholders; strengthened KPI reporting, risk management, and executive narrative; aligned vendors and internal teams to governance standards.</p></div>
+						<div class="block"><div class="label">Impact</div><p>Improved governance coverage and reporting quality across <b>130+</b> countries; sustained performance leading to <b>99.95%</b> SLA outcomes; contributed to <b>$7M</b> annual cost optimization visibility and execution.</p></div>
+					</div>
+				</article>
+
+				<article class="roleCard">
+					<div class="roleTop">
+						<h4>Delivery Lead – Infrastructure Lifecycle &amp; Service Governance</h4>
+						<div class="meta">Ericsson • 2021–2024</div>
+					</div>
+					<div class="cai">
+						<div class="block"><div class="label">Challenge</div><p>Lifecycle governance gaps reduced planning accuracy and increased operational risk across large infrastructure estates.</p></div>
+						<div class="block"><div class="label">Action</div><p>Designed a governance model for lifecycle visibility: portfolio controls, reporting routines, stakeholder alignment, and decision-ready escalation paths.</p></div>
+						<div class="block"><div class="label">Impact</div><p>Identified <b>10,000+</b> lifecycle gaps and improved planning quality; reduced operational risk through structured controls and consistent governance cadence.</p></div>
+					</div>
+				</article>
+
+				<article class="roleCard">
+					<div class="roleTop">
+						<h4>IT Engineer</h4>
+						<div class="meta">Ericsson • 2019–2021</div>
+					</div>
+					<div class="cai">
+						<div class="block"><div class="label">Challenge</div><p>Enable reliable delivery execution while coordinating across multiple teams, vendors, and shifting operational priorities.</p></div>
+						<div class="block"><div class="label">Action</div><p>Implemented stronger milestone tracking, risk &amp; issue controls, and reporting habits; improved stakeholder alignment through clear updates and documentation.</p></div>
+						<div class="block"><div class="label">Impact</div><p>Improved predictability and visibility in delivery workstreams, enabling expanded scope into governance leadership roles.</p></div>
+					</div>
+				</article>
+
+				<article class="roleCard">
+					<div class="roleTop">
+						<h4>Assistant Engineer</h4>
+						<div class="meta">Ericsson • 2016–2019</div>
+					</div>
+					<div class="cai">
+						<div class="block"><div class="label">Challenge</div><p>Operate effectively in complex technical delivery contexts with high expectations for quality and reliability.</p></div>
+						<div class="block"><div class="label">Action</div><p>Built strong execution discipline, documentation rigor, and collaboration practices across technical delivery activities.</p></div>
+						<div class="block"><div class="label">Impact</div><p>Established a performance foundation that enabled sustained internal growth and increased leadership scope.</p></div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="ai" class="aiSection">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Digital Innovation &amp; AI</h3>
+					<p>Independent innovation projects developed alongside professional responsibilities to explore how AI can enhance governance, service delivery, reporting, automation, and decision-making.</p>
+				</div>
+			</div>
+
+			<div style="display:grid; gap:12px; margin-bottom:14px">
+				<div class="project" style="padding:16px">
+					<p style="margin:0"><b>Why I Built These:</b> These independent projects were developed outside of Ericsson to explore how AI, automation, and structured reporting can improve governance, executive decision-making, service delivery, and operational performance. They represent my interest in applying modern technology to practical business challenges and demonstrate how AI can enhance visibility, reduce reporting effort, and support better decisions in complex delivery environments.</p>
+				</div>
+				<div class="project" style="padding:16px">
+					<p style="margin:0"><b>My Perspective on AI in Delivery Leadership:</b> I view AI not as a replacement for governance, but as a force multiplier. The greatest opportunity lies in reducing reporting effort, improving visibility, identifying risk earlier, and helping leaders make faster, better-informed decisions. My independent projects explore how these concepts can be applied in program management, service delivery, and operational governance environments.</p>
+				</div>
+			</div>
+
+			<div style="display:grid; gap:14px">
+				<article class="project">
+					<div class="projectHead">
+						<h4>VertexOpsX</h4>
+						<div class="links">
+							<a class="btn primary demoBtn" href="https://vertexopsx.lovable.app/" target="_blank" rel="noopener" aria-label="VertexOpsX live demo">View Live Demo</a>
+						</div>
+					</div>
+					<p><b>Overview:</b> A governance and operations assistant designed to convert fragmented delivery signals into structured executive insights.</p>
+					<div class="projectGrid" style="margin-top:12px">
+						<div class="box"><h5>Project Status</h5><ul><li>Independent innovation project</li></ul></div>
+						<div class="box"><h5>Built Using</h5><ul><li>AI-assisted development</li><li>Prompt engineering</li><li>Workflow design</li><li>Governance concepts</li></ul></div>
+						<div class="box"><h5>Purpose</h5><ul><li>Demonstrates practical applications of AI in governance, service delivery, reporting, executive communication, and operational decision support.</li></ul></div>
+						<div class="box"><h5>Real-World Use Case</h5><ul><li>Designed to support weekly governance reviews, executive reporting, service delivery operating cadence, and leadership decision-making.</li></ul></div>
+					</div>
+					<div class="projectGrid">
+						<div class="box">
+							<h5>Business Problem</h5>
+							<ul>
+								<li>Delivery reporting is often manual, delayed, and inconsistent across teams.</li>
+								<li>Executives need decision-ready summaries, not raw trackers.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Solution</h5>
+							<ul>
+								<li>Structured intake → governance signals → executive narrative outputs.</li>
+								<li>Designed for repeatable cadence: weekly, monthly, and QBR reporting.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Key Features</h5>
+							<ul>
+								<li>Risk &amp; issue clustering, trend detection, and escalation triggers.</li>
+								<li>Executive-ready summaries with KPI traceability.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Impact</h5>
+							<ul>
+								<li>Improves leadership signal-to-noise by converting raw updates into decision-ready briefs.</li>
+								<li>Reduces reporting cycle time by standardizing inputs and outputs across governance cadence.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Lessons Learned</h5>
+							<ul>
+								<li>Adoption improves when outputs match leadership decision language.</li>
+								<li>Governance value comes from consistency, not novelty.</li>
+							</ul>
+						</div>
+					</div>
+				</article>
+
+				<article class="project">
+					<div class="projectHead">
+						<h4>ProgramPulse AI</h4>
+						<div class="links">
+							<a class="btn primary demoBtn" href="https://program-pulseai.lovable.app/" target="_blank" rel="noopener" aria-label="ProgramPulse AI live demo">View Live Demo</a>
+						</div>
+					</div>
+					<p><b>Overview:</b> A technical program assistant built to improve governance health through early warning signals and automated performance narratives.</p>
+					<p style="margin:10px 0 0; color:rgba(255,255,255,.78)"><b>Subtitle:</b> Governance Health &amp; Early Warning Platform</p>
+					<div class="projectGrid" style="margin-top:12px">
+						<div class="box"><h5>Project Status</h5><ul><li>Independent innovation project</li></ul></div>
+						<div class="box"><h5>Built Using</h5><ul><li>AI-assisted development</li><li>Prompt engineering</li><li>Workflow design</li><li>Governance concepts</li></ul></div>
+						<div class="box"><h5>Purpose</h5><ul><li>Demonstrates practical applications of AI in governance, service delivery, reporting, executive communication, and operational decision support.</li></ul></div>
+						<div class="box"><h5>Real-World Use Case</h5><ul><li>Designed to provide early visibility into governance health, delivery risk trends, dependency pressure, and stakeholder alignment.</li></ul></div>
+					</div>
+					<div class="projectGrid">
+						<div class="box">
+							<h5>Business Problem</h5>
+							<ul>
+								<li>Programs fail silently when risks are fragmented across tools and teams.</li>
+								<li>Governance maturity requires continuous measurement, not occasional reviews.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Solution</h5>
+							<ul>
+								<li>Aggregates program signals into a single governance health view.</li>
+								<li>Generates standardized weekly program summaries for leadership.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Key Features</h5>
+							<ul>
+								<li>Milestone variance + risk drift + dependency pressure detection.</li>
+								<li>Decision prompts: what needs escalation, what can be delegated.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Impact</h5>
+							<ul>
+								<li>Creates earlier visibility into risk patterns before they become delivery escalations.</li>
+								<li>Improves governance consistency through standardized weekly health narratives.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Lessons Learned</h5>
+							<ul>
+								<li>Governance is improved by clarity of ownership and consistent cadence.</li>
+								<li>Automations must be explainable to build trust.</li>
+							</ul>
+						</div>
+					</div>
+				</article>
+
+				<article class="project">
+					<div class="projectHead">
+						<h4>ExecuPilot AI</h4>
+						<div class="links">
+							<a class="btn primary demoBtn" href="https://apex-exec-guide.lovable.app/" target="_blank" rel="noopener" aria-label="ExecuPilot AI live demo">View Live Demo</a>
+						</div>
+					</div>
+					<p><b>Overview:</b> A reporting copilot for executive stakeholders to quickly understand program state, key changes, and decisions needed.</p>
+					<div class="projectGrid" style="margin-top:12px">
+						<div class="box"><h5>Project Status</h5><ul><li>Independent innovation project</li></ul></div>
+						<div class="box"><h5>Built Using</h5><ul><li>AI-assisted development</li><li>Prompt engineering</li><li>Workflow design</li><li>Governance concepts</li></ul></div>
+						<div class="box"><h5>Purpose</h5><ul><li>Demonstrates practical applications of AI in governance, service delivery, reporting, executive communication, and operational decision support.</li></ul></div>
+						<div class="box"><h5>Audience</h5><ul><li>Program Directors</li><li>PMO leaders</li><li>Service delivery leaders</li><li>Executive stakeholders</li></ul></div>
+						<div class="box"><h5>Real-World Use Case</h5><ul><li>Designed to convert complex program data into concise executive narratives and decision-ready reporting.</li></ul></div>
+					</div>
+					<div class="projectGrid">
+						<div class="box">
+							<h5>Business Problem</h5>
+							<ul>
+								<li>Executive time is limited; raw status updates are not actionable.</li>
+								<li>Teams need a structured way to communicate changes and decisions.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Solution</h5>
+							<ul>
+								<li>Converts program data into “what changed / why / decision needed”.</li>
+								<li>Designed for QBR-ready output and executive email summaries.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Key Features</h5>
+							<ul>
+								<li>Decision brief generation with traceable metrics.</li>
+								<li>Risk summaries with mitigation accountability prompts.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Impact</h5>
+							<ul>
+								<li>Increases executive comprehension by presenting what changed, why it matters, and decisions needed.</li>
+								<li>Strengthens accountability by pairing risks with clear mitigation owners and next actions.</li>
+							</ul>
+						</div>
+						<div class="box">
+							<h5>Lessons Learned</h5>
+							<ul>
+								<li>Strong templates outperform long narratives in executive contexts.</li>
+								<li>Successful copilot outputs must be consistently formatted and concise.</li>
+							</ul>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="awards">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Awards &amp; Recognition</h3>
+					<p>Recognition for measurable impact and leadership contribution at enterprise scale.</p>
+				</div>
+			</div>
+
+			<div class="awardGrid">
+				<div class="award"><div class="t">CEO Key Contributor Award (2026)</div><div class="d">Recognized for exceptional contribution and business impact.</div></div>
+				<div class="award"><div class="t">CEO Key Contributor Award (2023)</div><div class="d">Recognized for leadership, execution excellence, and operational value creation.</div></div>
+				<div class="award"><div class="t">Galactic Award (2021)</div><div class="d">Recognized for outstanding performance and contribution to strategic initiatives.</div></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="certs">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Certifications &amp; Continuous Learning</h3>
+					<p>20+ professional certifications across project management, agile delivery, service governance, automation, citizen development, and artificial intelligence—reinforcing a commitment to continuous growth, innovation, and modern leadership practices.</p>
+				</div>
+			</div>
+
+			<div class="tabs" data-tabs>
+				<div class="tabBar" role="tablist" aria-label="Certification categories">
+					<button class="tabBtn" role="tab" aria-selected="true" aria-controls="tab-core" id="tabBtn-core" type="button">Core Professional</button>
+					<button class="tabBtn" role="tab" aria-selected="false" aria-controls="tab-ai" id="tabBtn-ai" type="button">AI &amp; Generative AI</button>
+					<button class="tabBtn" role="tab" aria-selected="false" aria-controls="tab-auto" id="tabBtn-auto" type="button">Automation &amp; Citizen Dev</button>
+					<button class="tabBtn" role="tab" aria-selected="false" aria-controls="tab-agile" id="tabBtn-agile" type="button">Agile &amp; Modern Delivery</button>
+					<button class="tabBtn" role="tab" aria-selected="false" aria-controls="tab-gov" id="tabBtn-gov" type="button">Service Mgmt &amp; Governance</button>
+				</div>
+
+				<div class="tabPanel" role="tabpanel" id="tab-core" aria-labelledby="tabBtn-core" data-active="true">
+					<div class="coreGrid">
+					<div class="coreCard">
+							<div class="coreTop"><span class="logoChip">PMI</span><span class="tag strong">Primary</span></div>
+							<h5>Project Management Professional (PMP)</h5>
+							<div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/5c83ac19-7f0c-4d55-b2e0-a91698bcee52/public_url" target="_blank" rel="noopener">View verification</a></div>
+							<div class="metaRows">
+								<div class="metaRow"><div class="k">Provider</div><div class="v">Project Management Institute</div></div>
+								<div class="metaRow"><div class="k">Issued</div><div class="v">April 2025</div></div>
+								<div class="metaRow"><div class="k">Valid Until</div><div class="v">April 2031</div></div>
+							</div>
+						</div>
+						<div class="coreCard">
+							<div class="coreTop"><span class="logoChip">Scrum.org</span><span class="tag strong">Primary</span></div>
+							<h5>Professional Scrum Master I (PSM I)</h5>
+							<div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/c79bb1f2-fb6d-44b9-8237-a8c51a36fb1b/linked_in_profile" target="_blank" rel="noopener">View verification</a></div>
+							<div class="metaRows">
+								<div class="metaRow"><div class="k">Provider</div><div class="v">Scrum.org</div></div>
+								<div class="metaRow"><div class="k">Issued</div><div class="v">May 2025</div></div>
+							</div>
+						</div>
+						<div class="coreCard">
+							<div class="coreTop"><span class="logoChip">PeopleCert</span><span class="tag strong">Primary</span></div>
+							<h5>ITIL® Foundation</h5>
+							<div style="margin-top:10px"><a class="verifyLink" href="https://www.peoplecert.org/public-profile?ed=XCHu3ZqUTNKN7eARbynN0155kHFdlMUp" target="_blank" rel="noopener">View verification</a></div>
+							<div class="metaRows">
+								<div class="metaRow"><div class="k">Provider</div><div class="v">PeopleCert</div></div>
+								<div class="metaRow"><div class="k">Issued</div><div class="v">September 2019</div></div>
+								<div class="metaRow"><div class="k">Valid Until</div><div class="v">February 2028</div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="tabPanel" role="tabpanel" id="tab-ai" aria-labelledby="tabBtn-ai" data-active="false">
+					<div class="capIntro"><p>Demonstrates active investment in AI literacy, prompt engineering, machine learning concepts, and the practical application of generative AI within project delivery, governance, and operational environments.</p></div>
+					<div class="credList">
+						<div class="cred"><div class="t">Generative AI Driver's License 2026</div><div class="p">Provider: Ericsson</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/0815ecb8-2b53-40e5-962c-b83722290a4b/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Prompt Engineering Badge – Fundamental Level</div><div class="p">Provider: Ericsson</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/760255ef-5ba8-4995-a0e8-b2e026339a90/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Practical Application of Gen AI for Project Managers</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/97cc3fb0-07b1-4c1b-9607-11b1f8a25e64/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Talking to AI: Prompt Engineering for Project Managers</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/818e4042-fc19-40a5-8798-a0a75ba78712/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Data Landscape of GenAI for Project Managers</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/bd15afb8-4fae-4030-929c-cbadb261aca1/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Generative AI Overview for Project Managers</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/aad7bba0-af83-4636-a858-8a65ab78a374/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Machine Learning Fundamental Level</div><div class="p">Provider: Ericsson</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/b929e23b-ef3c-42b2-b0d8-11476f7931f7/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">AI in Infrastructure &amp; Construction Projects</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/3bfb6c2a-e279-4449-bb10-8984d1180912/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+					</div>
+				</div>
+
+				<div class="tabPanel" role="tabpanel" id="tab-auto" aria-labelledby="tabBtn-auto" data-active="false">
+					<div class="capIntro"><p>Focused on process automation, low-code innovation, workflow optimization, and operational efficiency.</p></div>
+					<div class="credList">
+						<div class="cred"><div class="t">PMI Citizen Developer™ Practitioner Skills</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/96a84d1d-fc86-476e-aeb9-32aaa73bf60b/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">PMI Citizen Developer™ Business Architect Skills</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/768f0baa-687a-43ab-98b8-271adac67eff/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Automation Fundamental Level</div><div class="p">Provider: Ericsson</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/c43efc56-534d-4173-b028-04b836e50a17/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Automation Experienced Level</div><div class="p">Provider: Ericsson</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/652c48fd-8378-47e8-9a01-004c8ced572d/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+					</div>
+				</div>
+
+				<div class="tabPanel" role="tabpanel" id="tab-agile" aria-labelledby="tabBtn-agile" data-active="false">
+					<div class="capIntro"><p>Demonstrates knowledge of agile delivery frameworks, scaling practices, product ownership, and modern execution methodologies.</p></div>
+					<div class="credList">
+						<div class="cred"><div class="t">Disciplined Agile Essentials</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/3064c7c5-eabe-4e0d-9aaa-0d05ec0257ee/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Agile Metrics for Success</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/83aee6a8-8d72-4c13-9f32-a144c022100e/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Agile Principles and Methodologies</div><div class="p">Provider: Skillsoft</div><div style="margin-top:10px"><a class="verifyLink" href="https://skillsoft.digitalbadges-eu.skillsoft.com/3a85b9e1-abcf-4905-85a9-1aaa90fd6715#acc.dEUmMgne" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Building Agile Capabilities in Your Organization</div><div class="p">Provider: Skillsoft</div><div style="margin-top:10px"><a class="verifyLink" href="https://skillsoft.digitalbadges-eu.skillsoft.com/f4154692-7614-4c86-b0f4-aa4252ab22a6#acc.DYHNU56p" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">The Essential Role of the Agile Product Owner</div><div class="p">Provider: Skillsoft</div><div style="margin-top:10px"><a class="verifyLink" href="https://skillsoft.digitalbadges-eu.skillsoft.com/6a9c4675-6600-4cf4-bf22-77c4f3bf1681#acc.uM2GDrIs" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Embracing Agile at Scale</div><div class="p">Provider: Skillsoft</div><div style="margin-top:10px"><a class="verifyLink" href="https://skillsoft.digitalbadges-eu.skillsoft.com/db316b25-e429-4a01-91ce-0f2f9259a68f#acc.FntTBGMV" target="_blank" rel="noopener">View verification</a></div></div>
+					</div>
+				</div>
+
+				<div class="tabPanel" role="tabpanel" id="tab-gov" aria-labelledby="tabBtn-gov" data-active="false">
+					<div class="capIntro"><p>Focused on service excellence, operational governance, problem management, and continuous improvement.</p></div>
+					<div class="credList">
+						<div class="cred"><div class="t">Putting ITIL® into Practice: Problem Management Techniques</div><div class="p">Provider: LinkedIn Learning</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.linkedin.com/learning/certificates/ea28dcc4c9ad26ed440c410b50afe0b277e79f5b8bc78c0ffe577fc1104f6cc5?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B%2BrfGRuNHQHmwzB0j1kwKvg%3D%3D" target="_blank" rel="noopener">View verification</a></div></div>
+						<div class="cred"><div class="t">Value Stream Management</div><div class="p">Provider: PMI</div><div style="margin-top:10px"><a class="verifyLink" href="https://www.credly.com/badges/405801df-2167-435e-b8b3-83480271b9a2/linked_in_profile" target="_blank" rel="noopener">View verification</a></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="contact">
+		<div class="container">
+			<div class="sectionTitle">
+				<div>
+					<h3>Contact</h3>
+					<p>For program leadership, delivery governance, operations transformation, and AI-enabled execution opportunities.</p>
+				</div>
+			</div>
+
+			<div class="contactCard">
+				<div>
+					<h4>Farhan Alam Khan</h4>
+					<p class="muted">Customer Project Manager | Technical Program Manager</p>
+					<p class="muted" style="margin-top:10px"><b>Email:</b> <span class="inlineCopy"><span id="emailLinkContact">farhanalamkhan1801@gmail.com</span><button class="copyBtn" type="button" data-copy="farhanalamkhan1801@gmail.com" aria-label="Copy email">Copy</button></span><br>
+					<b>LinkedIn:</b> <a href="https://www.linkedin.com/in/farhan-alam-khan" target="_blank" rel="noopener">linkedin.com/in/farhan-alam-khan</a><br>
+					<b>Location:</b> Noida, India<br>
+					<b>Availability:</b> Open to Global Relocation</p>
+				</div>
+				<div class="contactActions">
+					<a class="btn primary" href="docs/resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+					<a class="btn" href="https://www.linkedin.com/in/farhan-alam-khan" target="_blank" rel="noopener">Connect on LinkedIn</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container">
+			Built and maintained by Farhan Alam Khan.<br>
+			This portfolio highlights professional experience, leadership achievements, and independent AI innovation projects developed alongside global project delivery, governance, and service management responsibilities.<br>
+			Open to Global Relocation.
+		</div>
+	</footer>
+
+	<!-- Mobile menu removed per request -->
+
+	<script>
+		// Mobile menu removed per request
+
+		// Copy-to-clipboard
+		(function(){
+			const buttons = document.querySelectorAll('[data-copy]');
+			if(!buttons.length) return;
+			buttons.forEach((btn) => {
+				btn.addEventListener('click', async () => {
+					const value = btn.getAttribute('data-copy') || '';
+					try{
+						await navigator.clipboard.writeText(value);
+						const prev = btn.textContent;
+						btn.textContent = 'Copied';
+						setTimeout(() => { btn.textContent = prev || 'Copy'; }, 1200);
+					}catch(err){
+						// Fallback: select the email link text and copy
+						try{
+							const tmp = document.createElement('textarea');
+							tmp.value = value;
+							document.body.appendChild(tmp);
+							tmp.select();
+							document.execCommand('copy');
+							document.body.removeChild(tmp);
+							const prev = btn.textContent;
+							btn.textContent = 'Copied';
+							setTimeout(() => { btn.textContent = prev || 'Copy'; }, 1200);
+						}catch(e2){}
+					}
+				});
+			});
+		})();
+
+		// Certifications tabs
+		(function(){
+			const root = document.querySelector('[data-tabs]');
+			if(!root) return;
+			const buttons = Array.from(root.querySelectorAll('[role="tab"]'));
+			const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+			if(!buttons.length || !panels.length) return;
+
+			function activate(btn){
+				buttons.forEach((b) => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+				panels.forEach((p) => p.setAttribute('data-active', p.id === btn.getAttribute('aria-controls') ? 'true' : 'false'));
+			}
+
+			buttons.forEach((btn) => {
+				btn.addEventListener('click', () => activate(btn));
+			});
+		})();
+	</script>
+</body>
+</html>
